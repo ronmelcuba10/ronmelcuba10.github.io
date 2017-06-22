@@ -7,7 +7,7 @@ $(document).ready(function () {
 			"htmlcss-bar": 		["Html-CSS3","75","images/html5-css3.png"],
 			"javascript-bar": 	["JS"		,"50","images/js.png"],
 			"jquery-bar": 		["JQuery"	,"50","images/jquery.png"],
-			"php-bar": 			["PHP"		,"30","images/php.png"],
+			"php-bar": 			["PHP"		,"50","images/php.png"],
 			"laravel-bar": 		["Laravel"	,"40","images/laravel.png"],
 			"angular-bar": 		["Angular"	,"55","images/angular.png"],
 			"bootstrap-bar": 	["Bootstrap","70","images/Boostrap.png"],
