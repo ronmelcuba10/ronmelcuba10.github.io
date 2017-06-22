@@ -86,13 +86,13 @@ $(document).ready(function () {
 
 
 		$("#hobbies").append(function(){
-			var elements = '<div class="col-md-3"></div>'
+			var elements = "";//'<div class="col-md-2"></div>'
 			var hobby;
 			Object.keys(hobbies).forEach(function(key) {
 				hobby = hobbies[key];
 				hobby_image = hobby[0];
 				hobby_source = hobby[1];
-			    hobb = 	'<div class="col-md-1 image">' 
+			    hobb = 	'<div class="col-md-1 col-centered image">' 
 					+		'<a href="' + hobby_source + '">'
 			    	+ 		'<img alt="Responsive image" class="img-responsive img-circle center-block shadowboxes"'
 			    	+ 		'src="' + hobby_image + '" />'
