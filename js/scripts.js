@@ -75,23 +75,28 @@ $(document).ready(function () {
 
 
 		var hobbies = {
-			"Family": 			"images/family.png",
-			"Sports": 		 	"images/basketball.png",
-			"Food &amp; Wine": 	"images/food_and_wine.png",
-			"Video games": 		"images/video_game.png",
-			"Learn &amp; Read": "images/glasses.png",
-			"Lego blocks": 		"images/LEGO.png"
+			"Family": 			["images/family.png"		,"#"],
+			"Sports": 		 	["images/basketball.png"	,"#"],
+			"Food &amp; Wine": 	["images/food_and_wine.png"	,"#"],
+			"Video games": 		["images/video_game.png"	,"#"],
+			"Learn &amp; Read": ["images/glasses.png"		,"#"],
+			"Lego blocks": 		["images/LEGO.png"			,"#"],
+			"My Games":			["images/TicTacToe.png"		,"games/tictactoe/tictactoe.html"]
 		};
 
 
 		$("#hobbies").append(function(){
 			var elements = '<div class="col-md-3"></div>'
-			var value;
+			var hobby;
 			Object.keys(hobbies).forEach(function(key) {
-				hobby_image = hobbies[key];
+				hobby = hobbies[key];
+				hobby_image = hobby[0];
+				hobby_source = hobby[1];
 			    hobb = 	'<div class="col-md-1 image">' 
+					+		'<a href="' + hobby_source + '">'
 			    	+ 		'<img alt="Responsive image" class="img-responsive img-circle center-block shadowboxes"'
 			    	+ 		'src="' + hobby_image + '" />'
+					+		'</a>'
 			    	+ 		'<h4>' + key + '</h4>' 
 			    	+ '</div>';
 				elements += hobb;
