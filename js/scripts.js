@@ -1,17 +1,17 @@
 $(document).ready(function () {
 		var levels = {
-			"csharp-bar": 		["CSharp"	,"60","images/csharp.png"],
-			"java-bar": 		["Java"		,"55","images/java.png"],
+			"csharp-bar": 		["CSharp"	,"80","images/csharp.png"],
+			"java-bar": 		["Java"		,"75","images/java.png"],
 			"delphi-bar": 		["Delphi"	,"80","images/delphi.png"],
-			"python-bar": 		["Python"	,"50","images/python.png"],
+			"python-bar": 		["Python"	,"70","images/python.png"],
 			"htmlcss-bar": 		["Html-CSS3","75","images/html5-css3.png"],
-			"javascript-bar": 	["JS"		,"40","images/js.png"],
-			"jquery-bar": 		["JQuery"	,"40","images/jquery.png"],
+			"javascript-bar": 	["JS"		,"50","images/js.png"],
+			"jquery-bar": 		["JQuery"	,"50","images/jquery.png"],
 			"php-bar": 			["PHP"		,"30","images/php.png"],
 			"laravel-bar": 		["Laravel"	,"40","images/laravel.png"],
 			"angular-bar": 		["Angular"	,"55","images/angular.png"],
 			"bootstrap-bar": 	["Bootstrap","70","images/Boostrap.png"],
-			"mysql-bar": 		["MySQL"	,"50","images/mysql.png"]
+			"mysql-bar": 		["MySQL"	,"70","images/mysql.png"]
 		};
 
 
