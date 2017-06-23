@@ -1,12 +1,36 @@
 .row-centered {
     text-align:center;
 }
+
 .col-centered {
     display:inline-block;
     float:none;
     vertical-align:top;
-    /* reset the text-align 
-    text-align:left;*/
-    /* inline-block space fix */
     margin-right:-4px;
+}
+
+#home-title, #pc-title {
+	border-bottom: 5px solid blue;
+}
+
+#home, #pc {
+	width: 550px;
+	height: 600px;
+	border-radius: 5px;
+    border: 2px solid #73AD21;
+    margin: 5px;
+}
+
+.cell {
+	width: 80px;
+	height: 80px;
+	margin: 2px;
+	float: left;
+	border-radius: 5px;
+    border: 2px solid black;
+}
+
+.cell img {
+    width: 100%;
+    max-height: 100%;
 }
