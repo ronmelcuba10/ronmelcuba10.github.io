@@ -81,7 +81,7 @@ $(document).ready(function () {
 			"Video games": 		["images/video_game.png"	,"#"],
 			"Learn &amp; Read": ["images/glasses.png"		,"#"],
 			"Lego blocks": 		["images/LEGO.png"			,"#"],
-			"My Games":			["images/TicTacToe.png"		,"games/tictactoe/tictactoe.html"]
+			"My Games":			["images/TicTacToe.png"		,"games/index.html"]
 		};
 
 
