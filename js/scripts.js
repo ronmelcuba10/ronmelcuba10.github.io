@@ -81,12 +81,12 @@ $(document).ready(function () {
 			"Video games": 		["images/video_game.png"	,"#"],
 			"Learn &amp; Read": ["images/glasses.png"		,"#"],
 			"Lego blocks": 		["images/LEGO.png"			,"#"],
-			"My Games":			["images/TicTacToe.png"		,"games/index.html"]
+			"My Games":			["images/TicTacToe.png"		,"games/games.html"]
 		};
 
 
 		$("#hobbies").append(function(){
-			var elements = "";//'<div class="col-md-2"></div>'
+			var elements = "";
 			var hobby;
 			Object.keys(hobbies).forEach(function(key) {
 				hobby = hobbies[key];
