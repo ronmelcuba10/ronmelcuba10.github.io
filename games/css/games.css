@@ -1,3 +1,13 @@
+body {
+    background-image: url("http://cdn.wallpapersafari.com/66/55/qVhUQe.jpg");
+}
+
+h3 a {
+    color: #00FF00;
+    text-shadow: 2px 2px black;
+    font-weight:bold;
+}
+
 .center-page {
   position: fixed;
   top: 40%;
@@ -6,4 +16,16 @@
   transform: -webkit-translate(-50%, -50%);
   transform: -moz-translate(-50%, -50%);
   transform: -ms-translate(-50%, -50%);
+}
+
+#tictactoe {
+    background-image: url("../tictactoe/background/tictactoe.png");
+    background-color: #82CAFA ;
+    background-position: 0px -60px;
+}
+
+#battleship {
+    background-image: url("../battleship/background/battleship.jpg");
+    background-color: #82CAFA ;
+    background-size: 100% 100%;
 }
