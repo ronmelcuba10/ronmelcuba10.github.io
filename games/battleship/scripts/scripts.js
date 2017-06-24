@@ -125,7 +125,7 @@ $( document ).ready(function() {
 		img.src = images_path + shot_a_board_cell(x,y,enemy_board);
     });
 
-	// retrieve if the shot was a miss or a hit
+	// returns if the shot was a miss or a hit
     function shot_a_board_cell(x,y,board) {
     	//var num = board[x][y];
     	//board[x][y] = num == '0' ? "H" : "M";
