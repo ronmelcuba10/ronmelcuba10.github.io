@@ -1,12 +1,18 @@
 $( document ).ready(function() {
+
+
 	var ships = 6;
 	var size = 6;
-	var enemy_board = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
-	var home_board = [[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0],[0,0,0,0,0,0]];
+	var enemy_board = [['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0']];
+	var home_board = [['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0']];
 	var home_div = document.getElementById("home-board");
 	var pc_div = document.getElementById("pc-board");
 	var clickable = "clickable";
+	var new_cell = "new-cell";
 	var images_path = "images/";
+	var space = "space.png";
+	var hit = "hit.png";
+	var miss = "miss.png";
 	var game_finished = false;
 	
 	
@@ -20,8 +26,12 @@ $( document ).ready(function() {
 	}
 	*/
 
+	// initial board draw process
 	draw_boards();
-	fill_boards();
+	// initial boards population
+	enemy_board[0][5] = "3";
+	fill_boards() 
+	
 
 	// draw both boards elements
 	function draw_boards() {
@@ -32,25 +42,34 @@ $( document ).ready(function() {
 	// draw the boards elements
 	function draw_board(element) {
 		for(var i=0; i<size; i++){
-			this_row = create_row(element.id + "_" + i.toString());
+			this_row = create_row(element.id + "-" + i.toString());
 			for(var j=0; j<size; j++){
-				this_row.appendChild(create_cell(element === pc_div));
+				var id = element.id + "-cell_" + i.toString() + j.toString();
+				this_row.appendChild(create_cell(element === pc_div,id));
 			}
 			element.appendChild(this_row);
 		}
 	}
 
 	// creates an empty cell
-	function create_cell(is_clickable) {
-		console.log(is_clickable);
+	function create_cell(is_clickable, id) {
+		// creates the div
 		var cell_div = document.createElement("div");
-		cell_div.className = "col-centered cell " + (is_clickable ? clickable : "");
-		var img = document.createElement("img");
-		img.src = images_path + "space.png";
-		img.alt = "space";
-		img.className = "img-responsive";
-		cell_div.appendChild(img);
+		cell_div.className = "col-centered cell new-cell " + (is_clickable ? clickable : "");
+		cell_div.id = id;
+		// inserts a space image into the div
+		cell_div.appendChild(create_image(id,"space.png"));
 		return cell_div;
+	}
+
+	// creates a new image element
+	function create_image(id,img_name) {
+		var img = document.createElement("img");
+		img.src = images_path + img_name;
+		img.alt = img_name;
+		img.id = "img-" + id;
+		img.className = "img-responsive";
+		return img;
 	}
 
 	// creates a row to insert cells
@@ -70,20 +89,47 @@ $( document ).ready(function() {
 	// prepares a board with ships
 	function fill_board(board) {
 		var this_ships = 1;
-		console.log(board[0][0]);
+		console.log(typeof board);
 		for (var i=0; i<ships; i++) {
+			/*
 			do{
 				var x = Math.floor(Math.random(size) * 6);
 				var y = Math.floor(Math.random(size) * 6);
-			} while(board[x][y] != 0);
+			} while(board[x][y] != '0');
 			board[x][y] = this_ships++;
+			*/
+			board[0][0] = '1';
+			board[1][1] = '2';
+			board[2][2] = '3';
+			board[3][3] = '4';
+			board[4][4] = '5';
+			board[5][5] = '6';
+			return board;
 		}
 	}
 
 	$(".cell").click(function () {
+		// if the div clicked meets the following conditions then leave 
 		if(game_finished) return;
-        if (!$(this).hasClass(clickable)) return;
-		console.log("clicked on clickable");
-        }
-    );
+        if (!$(this).hasClass(clickable)) return; // in the right board
+        if (!$(this).hasClass(new_cell)) return; // in a new cell
+
+		// once here remove the "non-clicked" class and process the cell
+        $(this).removeClass(new_cell);
+        var index = (this.id).indexOf("_") + 1;
+        var x = parseInt((this.id).substring(index,index + 1));
+        var y = parseInt((this.id).substring(index + 1,index + 2));
+		var img = document.getElementById("img-" + this.id);
+
+		// change the cell's image
+		img.src = images_path + shot_a_board_cell(x,y,enemy_board);
+    });
+
+	// retrieve if the shot was a miss or a hit
+    function shot_a_board_cell(x,y,board) {
+    	//var num = board[x][y];
+    	//board[x][y] = num == '0' ? "H" : "M";
+    	//return board[x][y];
+		return x==y ? hit : miss;
+    };
 });
