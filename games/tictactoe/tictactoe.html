@@ -10,11 +10,13 @@
 <body>
     <div id="wrapper">
         <div id="header">
-            <h1>Tic Tac Toe</h1>
-            <h3>Difficulty :<label><input type="checkbox" id="expert" value="">Hard</label></h3>
+            <div class="white-background">
+                <div><h1>Tic Tac Toe</h1></div>
+                <div><h3>Difficulty :<label><input type="checkbox" id="expert" value="">Hard</label></h3></div>
+            </div>
         </div>
         <div id="left-pane"></div>
-        <div id="center-pane">
+        <div id="center-pane" class="white-background">
             <div id="left-col">
                 <div class="cell empty-cell" id="c00">
                 </div>
@@ -43,8 +45,12 @@
         </div>
         <div class="row-fluid">
             <button type="button" id="restart-game-button" class="btn btn-primary btn-lg">Reset Game</button>
-            <h1 id="message">Keep playing</h1>
-            <a href="https://ronmelcuba10.github.io/games/index.html">Return to the game index</a>
+            <div>
+                <div class="white-background">
+                    <h1 id="message">Keep playing</h1>
+                    <a href="https://ronmelcuba10.github.io/games/index.html">Return to the game index</a>
+                </div>
+            </div>
         </div>
     </div>
     <script src="Scripts/tictactoejs.js"></script>
