@@ -2,20 +2,7 @@ $( document ).ready(function() {
 
 	var ships = 6;
 	var size = 6;
-	var enemy_board =  [['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0']];
-
-	var home_board =   [['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0'],
-						['0','0','0','0','0','0']];
-
+					
 	var home_div = document.getElementById("home-board");
 	var pc_div = document.getElementById("pc-board");
 	var clickable = "clickable";
@@ -25,23 +12,31 @@ $( document ).ready(function() {
 	var hit = "hit.png";
 	var miss = "miss.png";
 	var game_finished = false;
-	
-	
-	/*
-	var enemy_board = get2DArray(size);
-	var home_board = get2DArray(size);
-	console.log(home_board);
-	create_boards();
-	function get2DArray(the_size) {
-		return Array(the_size).fill(0).map(x => Array(10).fill(0));
-	}
-	*/
+	var enemy_board;
+	var home_board;
 
+	
+
+	// initalize boards objects
+	create_boards();
 	// initial board draw process
 	draw_boards();
 	// initial boards population
 	fill_boards() 
-	
+
+
+
+
+	// creates the 2 boards arrays 	
+	function create_boards() {
+		enemy_board = get2DArray(size);
+		home_board = get2DArray(size);
+	}
+
+	// creates a 2D array filled with '0'
+	function get2DArray(the_size) {
+		return Array(the_size).fill('0').map(x => Array(the_size).fill('0'));
+	}
 
 	// draw both boards elements
 	function draw_boards() {
@@ -132,4 +127,6 @@ $( document ).ready(function() {
     	board[x][y] = num == '0' ? miss : hit;
     	return board[x][y];
     };
+
+
 });
