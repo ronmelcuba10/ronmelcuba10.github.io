@@ -1,10 +1,21 @@
 $( document ).ready(function() {
 
-
 	var ships = 6;
 	var size = 6;
-	var enemy_board = [['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0']];
-	var home_board = [['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0'],['0','0','0','0','0','0']];
+	var enemy_board =  [['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0']];
+
+	var home_board =   [['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0'],
+						['0','0','0','0','0','0']];
+
 	var home_div = document.getElementById("home-board");
 	var pc_div = document.getElementById("pc-board");
 	var clickable = "clickable";
@@ -29,7 +40,6 @@ $( document ).ready(function() {
 	// initial board draw process
 	draw_boards();
 	// initial boards population
-	enemy_board[0][5] = "3";
 	fill_boards() 
 	
 
@@ -91,20 +101,11 @@ $( document ).ready(function() {
 		var this_ships = 1;
 		console.log(typeof board);
 		for (var i=0; i<ships; i++) {
-			/*
 			do{
-				var x = Math.floor(Math.random(size) * 6);
-				var y = Math.floor(Math.random(size) * 6);
+				var x = Math.floor(Math.random() * 6);
+				var y = Math.floor(Math.random() * 6);
 			} while(board[x][y] != '0');
 			board[x][y] = this_ships++;
-			*/
-			board[0][0] = '1';
-			board[1][1] = '2';
-			board[2][2] = '3';
-			board[3][3] = '4';
-			board[4][4] = '5';
-			board[5][5] = '6';
-			return board;
 		}
 	}
 
@@ -127,9 +128,8 @@ $( document ).ready(function() {
 
 	// returns if the shot was a miss or a hit
     function shot_a_board_cell(x,y,board) {
-    	//var num = board[x][y];
-    	//board[x][y] = num == '0' ? "H" : "M";
-    	//return board[x][y];
-		return x==y ? hit : miss;
+    	var num = board[x][y];
+    	board[x][y] = num == '0' ? miss : hit;
+    	return board[x][y];
     };
 });
