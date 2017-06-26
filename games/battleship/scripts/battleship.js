@@ -3,6 +3,26 @@ $(document).ready(function () {
 	var ships = 6;  // how many ships per board initially
 	var size = 6;	// board size (size X size)
 
+	var home_div = document.getElementById("home-board");
+	var pc_div = document.getElementById("pc-board");
+	var clickable = "clickable";
+	var new_cell = "new-cell";
+	var images_path = "images/";
+	var sounds_path = "sounds/"
+	var space_image = "space.png";
+	var hit_img = "hit.png";
+	var miss_img = "miss.png";
+	var hit_cell = "H";
+	var miss_cell = "M"; 
+	var empty_cell = "0";
+	var game_finished = false;
+	var enemy_board;
+	var home_board;
+	var win = 0;
+	var lost = 0;
+	var explosions = ["exp1.mp3","exp2.mp3","exp3.mp3","exp4.mp3","exp4.mp3","exp5.mp3","exp6.mp3"];
+	
+
 
 	function Coordinate(x,y) {
 		this.x = x;
@@ -25,8 +45,8 @@ $(document).ready(function () {
 		// returns an empty cell to fill a new board
 		this.get_empty_cell = function () {
 			do {
-				var x = Math.floor(Math.random() * 6);
-				var y = Math.floor(Math.random() * 6);
+				var x = my_random(size);
+				var y = my_random(size);
 			} while (this.board[x][y] != empty_cell);
 			return new Coordinate(x, y);
 		}
@@ -34,8 +54,8 @@ $(document).ready(function () {
 		// returns an cell that hasn't been shot, this methos is used for computer's moves
 		this.get_non_shot_cell = function () {
 			do {
-				var x = Math.floor(Math.random() * 6);
-				var y = Math.floor(Math.random() * 6);
+				var x = my_random(size);
+				var y = my_random(size);
 			} while (this.board[x][y] == miss_cell || this.board[x][y] == hit_cell);
 			return new Coordinate(x, y);
 		}
@@ -46,7 +66,10 @@ $(document).ready(function () {
 			var cell_board_value = this.board[x][y];
 			// depending on the current cell value(cell_value) modify to the cell value: miss or hit
 			this.board[x][y] = cell_board_value == empty_cell ? miss_cell : hit_cell;
-			if(cell_board_value != empty_cell) this.current_ships--;
+			if(cell_board_value != empty_cell) {
+				this.current_ships--
+				play_explosion(my_random(6));
+			};
 			// returns the file name for the attribute (src) of the img DOM element
 			return board[x][y] == miss_cell ? miss_img : hit_img;
 		};
@@ -57,22 +80,7 @@ $(document).ready(function () {
 
 	}
 
-	var home_div = document.getElementById("home-board");
-	var pc_div = document.getElementById("pc-board");
-	var clickable = "clickable";
-	var new_cell = "new-cell";
-	var images_path = "images/";
-	var space_image = "space.png";
-	var hit_img = "hit.png";
-	var miss_img = "miss.png";
-	var hit_cell = "H";
-	var miss_cell = "M"; 
-	var empty_cell = "0";
-	var game_finished = false;
-	var enemy_board;
-	var home_board;
-	var win = 0;
-	var lost = 0;
+	
 
 
 
@@ -83,6 +91,15 @@ $(document).ready(function () {
 	draw_boards_DOM();
 	// initial boards population
 	fill_boards()
+
+	function my_random(top) {
+		return Math.floor(Math.random() * top);
+	}
+
+	function play_explosion(index) {
+		var audio = new Audio( sounds_path + explosions[index]);
+		audio.play();
+	}
 
 
 	// creates the 2 boards arrays 	
@@ -239,5 +256,7 @@ $(document).ready(function () {
 		create_boards();
 		clear_boards_cells_DOM();
 	}
+
+	
 
 });
