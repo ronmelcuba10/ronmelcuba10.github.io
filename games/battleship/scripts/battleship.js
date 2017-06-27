@@ -10,11 +10,13 @@ $(document).ready(function () {
 	var images_path = "images/";
 	var sounds_path = "sounds/";
 	var backgrounds_path = "background/";
+	var hit_img = "hit.gif";
+	var miss_img = "miss.png";
 	var space_images = ["space1.png","space2.png","space3.png","space4.png","space5.png","space6.png","space7.png"];
 	var backgrounds_images = ["bk1.jpg","bk2.jpg","bk3.jpg","bk4.jpg","bk5.jpg","bk6.jpg","bk7.jpg"];
-	var ships_images = ["ship.png"];
-	var hit_img = "hit.webp";
-	var miss_img = "miss.png";
+	var ships_images = ["ship1.png","ship2.png","ship3.png","ship4.png","ship5.png","ship6.png","ship7.png","ship8.png"];
+	var hit_sounds = ["exp1.mp3","exp2.mp3","exp3.mp3","exp4.mp3","exp4.mp3","exp5.mp3","exp6.mp3"];
+	var miss_sounds = ["miss1.mp3","miss2.mp3","miss3.mp3","miss4.mp3","miss5.mp3"];
 	var hit_cell = "H";
 	var miss_cell = "M"; 
 	var empty_cell = "0";
@@ -22,9 +24,6 @@ $(document).ready(function () {
 	var game_finished = false;
 	var won = 0;
 	var lost = 0;
-	var hit_sounds = ["exp1.mp3","exp2.mp3","exp3.mp3","exp4.mp3","exp4.mp3","exp5.mp3","exp6.mp3"];
-	var mocks_sounds = ["mock1.mp3"];
-	var miss_sounds = ["miss1.mp3","miss2.mp3","miss3.mp3","miss4.mp3"];
 	var enemy_board;
 	var home_board;
 	
@@ -143,19 +142,13 @@ $(document).ready(function () {
 	function show_ships_in_DOM(div) {
 		var board = div == pc_div ? enemy_board : home_board;
 		var coords = board.get_ships_coords();
-		//coords.every( function );
-
-
-
-
-
-
-
-
-
-
-
-		
+		for (var i = 0; i < coords.length; i++) {
+			var img_element_id = "img-" + div.id + "-cell_" + coords[i].x + coords[i].y;
+			var img_element = document.getElementById(img_element_id);
+			console.log(img_element_id);
+			img_element.src = images_path + ships_images[my_random(ships_images.length)];
+			img_element.alt = "ship image";
+		}
 	}
 
 
@@ -280,8 +273,8 @@ $(document).ready(function () {
 		var img_enemy = document.getElementById("img-" + this.id);
 		var enemy_cell_image = enemy_board.shot_a_board_cell(x, y);
 		img_enemy.src = images_path + enemy_cell_image;
+		img_enemy.alt = enemy_cell_image;
 		if(enemy_cell_image == miss_img){
-			play_sound(mocks_sounds);
 			play_sound(miss_sounds)
 		} else {
 			play_sound(hit_sounds);
@@ -307,6 +300,7 @@ $(document).ready(function () {
 		var img_home = document.getElementById("img-home-board-cell_" + coord.x + coord.y);
 		var home_cell_image = home_board.shot_a_board_cell(coord.x, coord.y);
 		img_home.src = images_path + home_cell_image;
+		img_home.alt = home_cell_image;
 
 		update_ships_left_DOM(home_div);
 
