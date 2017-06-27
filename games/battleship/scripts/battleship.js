@@ -8,19 +8,25 @@ $(document).ready(function () {
 	var clickable = "clickable";
 	var new_cell = "new-cell";
 	var images_path = "images/";
-	var sounds_path = "sounds/"
-	var space_image = "space.png";
-	var hit_img = "hit.png";
+	var sounds_path = "sounds/";
+	var backgrounds_path = "background/";
+	var space_images = ["space1.png","space2.png","space3.png","space4.png","space5.png","space6.png","space7.png"];
+	var backgrounds_images = ["bk1.jpg","bk2.jpg","bk3.jpg","bk4.jpg","bk5.jpg","bk6.jpg","bk7.jpg"];
+	var ships_images = ["ship.png"];
+	var hit_img = "hit.webp";
 	var miss_img = "miss.png";
 	var hit_cell = "H";
 	var miss_cell = "M"; 
 	var empty_cell = "0";
+	var score_id = "score"
 	var game_finished = false;
+	var won = 0;
+	var lost = 0;
+	var hit_sounds = ["exp1.mp3","exp2.mp3","exp3.mp3","exp4.mp3","exp4.mp3","exp5.mp3","exp6.mp3"];
+	var mocks_sounds = ["mock1.mp3"];
+	var miss_sounds = ["miss1.mp3","miss2.mp3","miss3.mp3","miss4.mp3"];
 	var enemy_board;
 	var home_board;
-	var win = 0;
-	var lost = 0;
-	var explosions = ["exp1.mp3","exp2.mp3","exp3.mp3","exp4.mp3","exp4.mp3","exp5.mp3","exp6.mp3"];
 	
 
 
@@ -66,22 +72,31 @@ $(document).ready(function () {
 			var cell_board_value = this.board[x][y];
 			// depending on the current cell value(cell_value) modify to the cell value: miss or hit
 			this.board[x][y] = cell_board_value == empty_cell ? miss_cell : hit_cell;
-			if(cell_board_value != empty_cell) {
-				this.current_ships--
-				play_explosion(my_random(6));
-			};
 			// returns the file name for the attribute (src) of the img DOM element
+			if ((board[x][y]) == hit_cell) this.current_ships--;
 			return board[x][y] == miss_cell ? miss_img : hit_img;
 		};
+
+		this.get_ships_coords = function () {
+			var ships_left = this.current_ships;
+			var coords = [];
+			for (var i = 0; i < size; i++) {
+				for (var j = 0; j < size; j++) {
+					if (ships_left == 0) return coords;
+					var cell = this.board[i][j];
+					if (cell == empty_cell || cell == miss_cell || cell == hit_cell) continue;
+					ships_left--;
+					coords.push(new Coordinate(i,j));
+				}
+			}
+			return coords;
+		}
 
 		this.game_over = function () {
 			return this.current_ships == 0;
 		}
 
 	}
-
-	
-
 
 
 
@@ -96,11 +111,10 @@ $(document).ready(function () {
 		return Math.floor(Math.random() * top);
 	}
 
-	function play_explosion(index) {
-		var audio = new Audio( sounds_path + explosions[index]);
+	function play_sound(sounds) {
+		var audio = new Audio( sounds_path + sounds[my_random(sounds.length)]);
 		audio.play();
 	}
-
 
 	// creates the 2 boards arrays 	
 	function create_boards() {
@@ -115,8 +129,42 @@ $(document).ready(function () {
 
 	// draw both boards elements
 	function draw_boards_DOM() {
+		set_background_DOM();
 		draw_board_DOM(pc_div);
 		draw_board_DOM(home_div);
+	}
+
+	function show_ships_DOM() {
+		show_ships_in_DOM(pc_div);
+		show_ships_in_DOM(home_div);
+	}
+
+
+	function show_ships_in_DOM(div) {
+		var board = div == pc_div ? enemy_board : home_board;
+		var coords = board.get_ships_coords();
+		//coords.every( function );
+
+
+
+
+
+
+
+
+
+
+
+		
+	}
+
+
+
+	function set_background_DOM() {
+		document.body.style.backgroundImage = `url('${backgrounds_path + backgrounds_images[my_random(backgrounds_images.length)]}')`;
+    	document.body.style.backgroundSize = "100% auto";
+		document.body.style.backgroundRepeat = "no-repeat";
+		document.body.style.backgroundPosition = "top center";
 	}
 
 	// draw the boards elements
@@ -129,11 +177,13 @@ $(document).ready(function () {
 			}
 			element.appendChild(this_row);
 		}
-		update_ships_left(element);
+		update_ships_left_DOM(element);
 	}
 
+
+
 	// updates the ships left for the board related to the element passed as parameter
-	function update_ships_left(element) {
+	function update_ships_left_DOM(element) {
 		var is_home_board = element === home_div;
 		// get the id
 		var ship_left_id = is_home_board ? "home-ships-left" : "pc-ships-left";
@@ -142,6 +192,10 @@ $(document).ready(function () {
 		// update the ships value
 		var ships_left_element = document.getElementById(ship_left_id);
 		ships_left_element.innerHTML = `Ship(s) left: ${ships_left}`;
+	}
+
+	function update_scores_DOM() {
+		document.getElementById(score_id).innerHTML = `Won ${won} -- Lost ${lost}`;
 	}
 
 	// class for a new fresh cell in the board
@@ -156,7 +210,7 @@ $(document).ready(function () {
 		cell_div.className = new_cell_classes(is_clickable);
 		cell_div.id = id;
 		// inserts a space image into the div
-		cell_div.appendChild(create_image_DOM(id, space_image));
+		cell_div.appendChild(create_image_DOM(id, space_images[my_random(5)]));
 		return cell_div;
 	}
 
@@ -171,7 +225,7 @@ $(document).ready(function () {
 			// get the image inside the div: it is only one
 			var elements = div_cells[i].getElementsByTagName("img");
 			// change its associated image
-			elements[0].src = images_path + space_image;
+			elements[0].src = images_path + space_images[my_random(5)];
 		}
 	}
 
@@ -224,12 +278,23 @@ $(document).ready(function () {
 
 		// change the cell's image
 		var img_enemy = document.getElementById("img-" + this.id);
-		img_enemy.src = images_path + enemy_board.shot_a_board_cell(x, y);
-		update_ships_left(pc_div);
+		var enemy_cell_image = enemy_board.shot_a_board_cell(x, y);
+		img_enemy.src = images_path + enemy_cell_image;
+		if(enemy_cell_image == miss_img){
+			play_sound(mocks_sounds);
+			play_sound(miss_sounds)
+		} else {
+			play_sound(hit_sounds);
+
+		}
+		update_ships_left_DOM(pc_div);
 		
 		// quit here if computer lost
 		if (enemy_board.game_over()) {
 			alert("You have won the game!! Please reset the game");
+			won++;
+			update_scores_DOM();
+			show_ships_DOM();
 			return;
 		}
 
@@ -240,11 +305,16 @@ $(document).ready(function () {
 		
 		// change the cell's image
 		var img_home = document.getElementById("img-home-board-cell_" + coord.x + coord.y);
-		img_home.src = images_path + home_board.shot_a_board_cell(coord.x, coord.y);
-		update_ships_left(home_div);
+		var home_cell_image = home_board.shot_a_board_cell(coord.x, coord.y);
+		img_home.src = images_path + home_cell_image;
+
+		update_ships_left_DOM(home_div);
 
 		if (home_board.game_over()) {
 			alert("You lost the game!! Please reset the game");
+			lost++;
+			update_scores_DOM();
+			show_ships_DOM();
 		}
 	});
 
@@ -254,9 +324,12 @@ $(document).ready(function () {
 
 	function reset_game(){
 		create_boards();
+		fill_boards();
+		set_background_DOM();
 		clear_boards_cells_DOM();
 	}
 
+	
 	
 
 });
