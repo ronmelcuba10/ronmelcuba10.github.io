@@ -155,7 +155,7 @@ $(document).ready(function () {
 
 	function set_background_DOM() {
 		document.body.style.backgroundImage = `url('${backgrounds_path + backgrounds_images[my_random(backgrounds_images.length)]}')`;
-    	document.body.style.backgroundSize = "100% auto";
+    	document.body.style.backgroundSize = "100% 100%";
 		document.body.style.backgroundRepeat = "no-repeat";
 		document.body.style.backgroundPosition = "top center";
 	}
