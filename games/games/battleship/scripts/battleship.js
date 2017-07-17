@@ -15,6 +15,7 @@ $(document).ready(function () {
 	var space_images = ["space1.png","space2.png","space3.png","space4.png","space5.png","space6.png","space7.png"];
 	var backgrounds_images = ["bk1.jpg","bk2.jpg","bk3.jpg","bk4.jpg","bk5.jpg","bk6.jpg","bk7.jpg"];
 	var ships_images = ["ship1.png","ship2.png","ship3.png","ship4.png","ship5.png","ship6.png","ship7.png","ship8.png"];
+	var ships_down_images = ["ship1d.png","ship2d.png","ship3d.png","ship4d.png","ship5d.png","ship6d.png","ship7d.png","ship8d.png"] 
 	var hit_sounds = ["exp1.mp3","exp2.mp3","exp3.mp3","exp4.mp3","exp4.mp3","exp5.mp3","exp6.mp3"];
 	var miss_sounds = ["miss1.mp3","miss2.mp3","miss3.mp3","miss4.mp3","miss5.mp3"];
 	var hit_cell = "H";
@@ -29,9 +30,10 @@ $(document).ready(function () {
 	
 
 
-	function Coordinate(x,y) {
+	function Coordinate(x,y,alive) {
 		this.x = x;
 		this.y = y;
+		this.ship_safe = alive;
 	}
 
 	function Game_board(board) {
@@ -53,16 +55,16 @@ $(document).ready(function () {
 				var x = my_random(size);
 				var y = my_random(size);
 			} while (this.board[x][y] != empty_cell);
-			return new Coordinate(x, y);
+			return new Coordinate(x, y, true);
 		}
 
-		// returns an cell that hasn't been shot, this methos is used for computer's moves
+		// returns an cell that hasn't been shot, this method is used for computer's moves
 		this.get_non_shot_cell = function () {
 			do {
 				var x = my_random(size);
 				var y = my_random(size);
 			} while (this.board[x][y] == miss_cell || this.board[x][y] == hit_cell);
-			return new Coordinate(x, y);
+			return new Coordinate(x, y, true);
 		}
 
 		// returns the image name coresponding 
@@ -77,15 +79,16 @@ $(document).ready(function () {
 		};
 
 		this.get_ships_coords = function () {
-			var ships_left = this.current_ships;
+			var ships_left = ships;
 			var coords = [];
 			for (var i = 0; i < size; i++) {
 				for (var j = 0; j < size; j++) {
 					if (ships_left == 0) return coords;
 					var cell = this.board[i][j];
-					if (cell == empty_cell || cell == miss_cell || cell == hit_cell) continue;
+					if (cell == empty_cell || cell == miss_cell) continue;
+					if (cell == hit_cell) coords.push(new Coordinate(i,j,false))
+					else coords.push(new Coordinate(i,j,true));
 					ships_left--;
-					coords.push(new Coordinate(i,j));
 				}
 			}
 			return coords;
@@ -146,8 +149,9 @@ $(document).ready(function () {
 			var img_element_id = "img-" + div.id + "-cell_" + coords[i].x + coords[i].y;
 			var img_element = document.getElementById(img_element_id);
 			console.log(img_element_id);
-			img_element.src = images_path + ships_images[my_random(ships_images.length)];
-			img_element.alt = "ship image";
+			image_name =  coords[i].ship_safe ? ships_images[my_random(ships_images.length)] : ships_down_images[my_random(ships_down_images.length)]
+			img_element.src = images_path + image_name;
+			img_element.alt = coords[i].ship_safe ? "ship image" : "ship explosion";
 		}
 	}
 
@@ -175,7 +179,7 @@ $(document).ready(function () {
 
 
 
-	// updates the ships left for the board related to the element passed as parameter
+	// updates the ships left in the board passed as parameter
 	function update_ships_left_DOM(element) {
 		var is_home_board = element === home_div;
 		// get the id
@@ -183,8 +187,7 @@ $(document).ready(function () {
 		// get the ships left
 		var ships_left = is_home_board ? home_board.current_ships : enemy_board.current_ships;
 		// update the ships value
-		var ships_left_element = document.getElementById(ship_left_id);
-		ships_left_element.innerHTML = `Ship(s) left: ${ships_left}`;
+		$("#" + ship_left_id).html(`Ship(s) left: ${ships_left}`);
 	}
 
 	function update_scores_DOM() {

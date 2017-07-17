@@ -2,7 +2,7 @@ body {
     background-image: url("../images/games.png");
 }
 
-h3 a {
+a h3 {
     color: #00FF00;
     text-shadow: 2px 2px black;
     font-weight:bold;
@@ -19,7 +19,7 @@ h3 a {
 }
 
 #tictactoe {
-    background-image: url("../tictactoe/background/tictactoe.png");
+    background-image: url("../games/tictactoe/background/tictactoe.png");
     background-color: #82CAFA ;
     background-position: 0px -60px;
 }
@@ -40,7 +40,7 @@ h3 a {
 }
 
 #battleship {
-    background-image: url("../battleship/background/battleship.jpg");
+    background-image: url("../games/battleship/background/battleship.jpg");
     background-color: #82CAFA ;
     background-size: 100% 100%;
 }

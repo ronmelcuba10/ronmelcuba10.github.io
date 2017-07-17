@@ -1,0 +1,104 @@
+.cell {
+    margin-left: 10px;
+    width : 100px;
+    height: 100px;
+    border-radius: 4px;
+    float: left;
+    position: relative;
+    line-height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+#board {
+    display:inline-block;
+    float:none;
+    background-color: #bbada0;;;
+    border-radius: 5px;
+    width:  450px;
+    height: 450px;
+}
+
+.cell-row {
+    margin-top: 10px; 
+    height: 100px;
+    position: relative;
+}
+
+.zero {
+    background-color: rgba(238, 228, 218, 0.35);
+}
+
+.two {
+    background-color: #eee4da;
+    color: #776e65;
+}
+
+.four {
+    background-color: #ede0c8;
+    color: #776e65;
+}
+
+.eight {
+    background-color: #f2b179;
+    color: #f9f6f2;
+}
+
+.sixteen {
+    background-color: #f59563;
+    color: #f9f6f2;
+}
+
+.thirtytwo {
+    background-color: #f67c5f;
+    color: #f9f6f2;
+}
+
+.sixtyfour {
+    background-color: #f65e3b;
+    color: #f9f6f2;
+}
+
+.onehundred {
+    background-color: #edcf72;
+    color: #f9f6f2;
+}
+
+.twohundred {
+    background-color: #edcc61;
+    color: #f9f6f2;
+}
+
+.fivehundred {
+    background-color: #eee4da;
+    color: #776e65;
+}
+
+.onethousand {
+    background-color: blue;
+    color: #776e65;
+}
+
+.twothousand {
+    background-color: #eee4da;
+    color: #776e65;
+}
+
+.above {
+    background-color: blue;
+    color: #776e65;
+}
+
+
+
+
+
+
+
+
+
+
+
