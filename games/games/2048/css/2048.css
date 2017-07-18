@@ -1,25 +1,56 @@
-.cell {
-    margin-left: 10px;
-    width : 100px;
+body{
+    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
+}
+
+#board-container {
+    display: inline-block;
+    float: none;
+    width:  450px;
+}
+
+#header {
+    width: 450px;
     height: 100px;
-    border-radius: 4px;
+    margin-bottom: 10px;
+}
+
+#restart-button {
+    background: #8f7a66;
+    color: #f9f6f2;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 3px;
     float: left;
-    position: relative;
-    line-height: 100px;
+    height: 60px;
+    width: 150px; 
+    line-height: 60px;
     text-align: center;
     vertical-align: middle;
-    font-family: "Clear Sans", "Helvetica Neue", Arial, sans-serif;
-    font-size: 50px;
+    cursor: pointer;
+}
+
+#score-group {
+    width: 100px;
+    height: 100px;
+    float: right;
+    background: #bbada0;
+    color: white;
+    border-radius: 3px;
+    font-size: 20px;
     font-weight: bold;
 }
 
+#score {
+    margin-top: 20px;
+    font-size: 30px;
+}
+
 #board {
-    display:inline-block;
-    float:none;
-    background-color: #bbada0;;;
+    margin-top: 10px;
+    background-color: #bbada0;
     border-radius: 5px;
-    width:  450px;
     height: 450px;
+    padding-top: 10px;
 }
 
 .cell-row {
@@ -28,6 +59,22 @@
     position: relative;
 }
 
+.cell {
+    margin-left: 10px;
+    float: left;
+    position: relative;
+    width : 100px;
+    height: 100px;
+    border-radius: 4px;
+    line-height: 100px;
+    text-align: center;
+    vertical-align: middle;
+    font-size: 50px;
+    font-weight: bold;
+}
+
+
+/* cells */
 .zero {
     background-color: rgba(238, 228, 218, 0.35);
 }

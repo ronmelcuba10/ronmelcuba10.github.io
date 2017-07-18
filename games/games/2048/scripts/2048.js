@@ -131,6 +131,8 @@ $(document).ready(function () {
                 console.log(`the board after number added ${this.toString()}`);
                 this.draw_cells_DOM();
             }
+
+            
             
         }
 
