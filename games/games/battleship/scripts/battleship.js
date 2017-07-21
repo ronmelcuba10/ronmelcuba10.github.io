@@ -142,6 +142,7 @@ $(document).ready(function () {
 	}
 
 
+	// shows the final status with ships (survivors and beaten)
 	function show_ships_in_DOM(div) {
 		var board = div == pc_div ? enemy_board : home_board;
 		var coords = board.get_ships_coords();
@@ -206,7 +207,7 @@ $(document).ready(function () {
 		cell_div.className = new_cell_classes(is_clickable);
 		cell_div.id = id;
 		// inserts a space image into the div
-		cell_div.appendChild(create_image_DOM(id, space_images[my_random(5)]));
+		cell_div.appendChild(create_image_DOM(id, space_images[my_random(space_images.length)]));
 		return cell_div;
 	}
 
@@ -221,7 +222,7 @@ $(document).ready(function () {
 			// get the image inside the div: it is only one
 			var elements = div_cells[i].getElementsByTagName("img");
 			// change its associated image
-			elements[0].src = images_path + space_images[my_random(5)];
+			elements[0].src = images_path + space_images[my_random(space_images.length)];
 		}
 	}
 
