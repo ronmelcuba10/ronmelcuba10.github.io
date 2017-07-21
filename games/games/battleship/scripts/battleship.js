@@ -5,7 +5,8 @@ $(document).ready(function () {
 
 	var home_div = document.getElementById("home-board");
 	var pc_div = document.getElementById("pc-board");
-	var clickable = "clickable";
+	var clickable_class = "clickable";
+	var no_class = "";
 	var new_cell = "new-cell";
 	var images_path = "images/";
 	var sounds_path = "sounds/";
@@ -157,7 +158,7 @@ $(document).ready(function () {
 	}
 
 
-
+	// change the background randomly, every time the game is reste
 	function set_background_DOM() {
 		document.body.style.backgroundImage = `url('${backgrounds_path + backgrounds_images[my_random(backgrounds_images.length)]}')`;
     	document.body.style.backgroundSize = "100% 100%";
@@ -197,7 +198,7 @@ $(document).ready(function () {
 
 	// class for a new fresh cell in the board
 	function new_cell_classes(is_clickable) {
-		return "col-centered cell new-cell " + (is_clickable ? clickable : "");
+		return "col-centered cell new-cell " + (is_clickable ? clickable_class : no_class);
 	}
 
 	// creates an empty cell
@@ -264,7 +265,7 @@ $(document).ready(function () {
 			reset_game();
 			return;
 		}
-		if (!$(this).hasClass(clickable)) return; // in the right board
+		if (!$(this).hasClass(clickable_class)) return; // in the right board
 		if (!$(this).hasClass(new_cell)) return; // in a non shot cell
 
 		// once here remove the "non-clicked" class and process the cell
