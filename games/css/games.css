@@ -18,12 +18,6 @@ a h3 {
   transform: -ms-translate(-50%, -50%);
 }
 
-#tictactoe {
-    background-image: url("../games/tictactoe/background/tictactoe.png");
-    background-color: #82CAFA ;
-    background-position: 0px -60px;
-}
-
 .option-text {
     opacity: 1;
     text-shadow: 2px 2px black;
@@ -39,8 +33,21 @@ a h3 {
     transition: .5s ease;
 }
 
-#battleship {
-    background-image: url("../games/battleship/background/battleship.jpg");
+#option-tictactoe {
+    background-image: url("../images/tictactoe.png");
+    background-color: #82CAFA ;
+    background-position: 0px -60px;
+}
+
+#option-battleship {
+    background-image: url("../images/battleship.jpg");
     background-color: #82CAFA ;
     background-size: 100% 100%;
+}
+
+#option-2048 {
+    background-image: url("../images/2048.png");
+    background-color: #82CAFA ;
+    background-size: 84% auto;
+    background-position: 107px -73px;
 }

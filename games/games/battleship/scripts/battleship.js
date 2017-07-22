@@ -7,6 +7,7 @@ $(document).ready(function () {
 	var pc_div = document.getElementById("pc-board");
 	var clickable_class = "clickable";
 	var no_class = "";
+	var cell_class = "cell";
 	var new_cell = "new-cell";
 	var images_path = "images/";
 	var sounds_path = "sounds/";
@@ -215,7 +216,7 @@ $(document).ready(function () {
 	// clears a board
 	function clear_board_cells_DOM(board_div,is_clickable) {
 		// get all the cell from the board
-		var div_cells = board_div.getElementsByClassName("cell");
+		var div_cells = board_div.getElementsByClassName(cell_class);
 		// for each cell do..
 		for(var i=0; i<div_cells.length; i++) {
 			// clear al the classes and assign only the new cell's classes
