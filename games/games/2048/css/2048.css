@@ -14,19 +14,31 @@ body{
     margin-bottom: 10px;
 }
 
-#restart-button {
+.restart-class {
     background: #8f7a66;
     color: #f9f6f2;
     font-size: 20px;
     font-weight: bold;
     border-radius: 3px;
-    float: left;
     height: 60px;
     width: 150px; 
     line-height: 60px;
     text-align: center;
     vertical-align: middle;
     cursor: pointer;
+}
+
+#restart-button {
+    float: left;
+}
+
+#gameover {
+    left:50%;
+    top:93%;
+    -webkit-transform: translate(-50%, -50%);
+    -moz-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+    position:absolute;
 }
 
 #score-group {
@@ -44,6 +56,8 @@ body{
     margin-top: 20px;
     font-size: 30px;
 }
+
+
 
 #board {
     margin-top: 10px;
@@ -69,7 +83,6 @@ body{
     line-height: 100px;
     text-align: center;
     vertical-align: middle;
-    font-size: 50px;
     font-weight: bold;
 }
 
@@ -120,23 +133,23 @@ body{
 }
 
 .fivehundred {
-    background-color: #eee4da;
-    color: #776e65;
+    background-color:  #edc850;
+    color: #f9f6f2;
 }
 
 .onethousand {
-    background-color: blue;
-    color: #776e65;
+    color: #f9f6f2;
+    background: #edc53f;
 }
 
 .twothousand {
-    background-color: #eee4da;
-    color: #776e65;
+    color: #f9f6f2;
+    background: #edc22e;
 }
 
 .above {
-    background-color: blue;
-    color: #776e65;
+    color: #f9f6f2;
+    background: #3c3a32;
 }
 
 

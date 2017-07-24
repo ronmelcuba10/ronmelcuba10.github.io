@@ -8,6 +8,13 @@ $(document).ready(function () {
     var UP = 38;
     var RIGHT = 39;
     var DOWN = 40;
+    var first_font_size = "50px";
+    var second_font_size = "38px";
+    var third_font_size = "31px";
+    var board_container = "board-container";
+    var restart_button_class = "restart-class";
+    var gameover_id = "gameover";
+    var restart_button_id = "restart-button";
 
     
     var cell_classes = {
@@ -65,12 +72,12 @@ $(document).ready(function () {
         }
     }
 
-
     // the game object
     function Gameboard(board, size) {
         this.size = size;
         this.board = board;
         this.there_was_a_movement = false;
+        this.screen_is_locked = false;
         this.score = 0;
 
         // to use in the console for debugging
@@ -92,6 +99,8 @@ $(document).ready(function () {
             var this_cell = cells[4 * y + x];
             this_cell.innerHTML = cell_value ? cell_value.toString() : "";
             this_cell.className = `${cell_class} ${cell_classes[cell_value.toString()]}`;
+            // if number is less than 1024 use the first size, if is greater than 8189 use the third size, else use the middle size
+            this_cell.style.fontSize = cell_value < 1024 ? first_font_size : cell_value > 8192 ? third_font_size : second_font_size;
         }
 
         // show all the board's numbers in the cells(DOM)
@@ -103,6 +112,11 @@ $(document).ready(function () {
                 }
             }
         }
+
+        this.clear_board = function() {
+            this.board = get2DArray(size, initial_value);
+        }
+
 
         // adds a random cell with a number 2
         this.add_number = function () {
@@ -119,21 +133,71 @@ $(document).ready(function () {
             for (var i = 0; i < size; i++) {
                 console.log(`the board ${this.toString()}`);
                 var line = this.get_row_col_to_slide(i, vector);
+
                 console.log(`the board after getting the row/col ${this.toString()}`);
                 var slided_line = this.slide_row_col(line, vector);
+
                 console.log(`the line slided  ${slided_line.toString()}`);
                 console.log(`the board after sliding the line ${this.toString()}`);
                 this.update_board(i, vector, slided_line);
+
                 console.log(`the board after updated ${this.toString()}`);
             }
+            
+            // was there a movement
             if (this.there_was_a_movement){
                 this.add_number();
                 console.log(`the board after number added ${this.toString()}`);
                 this.draw_cells_DOM();
-            }
+            } else { // not a movement
 
-            
-            
+                if (this.game_is_locked() && !this.screen_is_locked) {
+                    console.log("game locked");
+                    this.show_locked_screen();
+                }
+            }
+        }
+
+        this.show_locked_screen = function() {
+            board_element.style.opacity = 0.3;
+            var container = document.getElementById(board_container);
+            var restart_div = document.createElement("div");
+            restart_div.innerHTML = "Game over"
+            restart_div.className = restart_button_class;
+            restart_div.id = gameover_id;
+            board_element.appendChild(restart_div);
+            this.screen_is_locked = true;
+
+            // register the event
+            $("#"+ gameover_id).click( function(){
+                console.log("here in gameover");
+                the_board.reset_board();
+            });
+        }
+
+        this.hide_locked_screen = function () {
+            board_element.style.opacity = 1;
+            console.log("here unlocking screen");
+            $("#" + gameover_id).remove();
+            this.screen_is_locked = false;
+        }
+
+        this.game_is_locked = function() {
+            for (var y = 0; y < this.size; y++) {
+                for (var x = 0; x < this.size; x++) {
+
+                    if (this.board[y][x] == 0) return false;
+
+                    if (y < this.size - 1){
+                        if (this.board[y][x] == this.board[y + 1][x]) return false;
+                    }
+
+                    if (x < this.size - 1){
+                        if (this.board[y][x] == this.board[y][x + 1]) return false;
+                    }
+                }
+            }
+            return true;
         }
 
         // get the row/col to be slided
@@ -236,23 +300,38 @@ $(document).ready(function () {
             return line;
         }
 
-        
+        this.set_board = function (){
+            this.add_number();
+            this.add_number();
+            this.draw_cells_DOM();
+        }
+
+        this.reset_board = function (){
+            this.clear_board();
+            this.hide_locked_screen();
+            this.set_board();
+        }
 
     };
 
 
     the_board = new Gameboard(get2DArray(size, initial_value), size);
-    the_board.add_number();
-    the_board.add_number();
-    the_board.draw_cells_DOM();
+    the_board.set_board();
 
     $(document).keydown(function (event) {
         if (event.which > 36 && event.which < 41){
             the_board.move(select_vector(event.which));
             event.preventDefault();
         }
-        
     });
 
+    $("#" + restart_button_id).click( function(){
+        console.log("here in restrt");
+        the_board.reset_board();
+    });
+
+    
+
+    
 
 });
