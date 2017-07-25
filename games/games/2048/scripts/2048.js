@@ -15,6 +15,8 @@ $(document).ready(function () {
     var restart_button_class = "restart-class";
     var gameover_id = "gameover";
     var restart_button_id = "restart-button";
+    var score_element_id = "score";
+    var max_score_element_id = "max-score";
 
     
     var cell_classes = {
@@ -79,6 +81,7 @@ $(document).ready(function () {
         this.there_was_a_movement = false;
         this.screen_is_locked = false;
         this.score = 0;
+        this.max_score = 0;
 
         // to use in the console for debugging
         this.toString = function () {
@@ -113,8 +116,22 @@ $(document).ready(function () {
             }
         }
 
+        this.update_scores_DOM = function() {
+            var score_element = document.getElementById(score_element_id);
+            var max_score_element = document.getElementById(max_score_element_id);
+            score_element.innerHTML = this.score;
+            max_score_element.innerHTML = this.max_score > this.score ? this.max_score : this.score;
+        }
+
         this.clear_board = function() {
             this.board = get2DArray(size, initial_value);
+            this.score = 0;
+            console.log("Cleanning the board and the score");
+        }
+
+        this.clear_score_DOM = function() {
+            var score_element = document.getElementById(score_element_id);
+            score_element.innerHTML = 0;
         }
 
 
@@ -149,6 +166,7 @@ $(document).ready(function () {
                 this.add_number();
                 console.log(`the board after number added ${this.toString()}`);
                 this.draw_cells_DOM();
+                this.update_scores_DOM();
             } else { // not a movement
 
                 if (this.game_is_locked() && !this.screen_is_locked) {
@@ -310,6 +328,7 @@ $(document).ready(function () {
             this.clear_board();
             this.hide_locked_screen();
             this.set_board();
+            this.clear_score_DOM();
         }
 
     };

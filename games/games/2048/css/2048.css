@@ -41,15 +41,16 @@ body{
     position:absolute;
 }
 
-#score-group {
+.score-box {
     width: 100px;
     height: 100px;
     float: right;
     background: #bbada0;
     color: white;
     border-radius: 3px;
-    font-size: 20px;
     font-weight: bold;
+    font-size: 18px;
+    margin-left: 5px;
 }
 
 #score {
@@ -57,7 +58,10 @@ body{
     font-size: 30px;
 }
 
-
+#max-score {
+    margin-top: 20px;
+    font-size: 30px;
+}
 
 #board {
     margin-top: 10px;
