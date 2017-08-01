@@ -8,6 +8,10 @@ $(document).ready(function () {
     var UP = 38;
     var RIGHT = 39;
     var DOWN = 40;
+    var A = 65;
+    var W = 87;
+    var D = 68;
+    var S = 83;
     var first_font_size = "50px";
     var second_font_size = "38px";
     var third_font_size = "31px";
@@ -338,8 +342,13 @@ $(document).ready(function () {
     the_board.set_board();
 
     $(document).keydown(function (event) {
-        if (event.which > 36 && event.which < 41){
-            the_board.move(select_vector(event.which));
+        var key = event.which;
+        if(key == A ) key = LEFT;
+        if(key == S ) key = DOWN;
+        if(key == W ) key = UP;
+        if(key == D ) key = RIGHT;
+        if (key > 36 && key < 41){
+            the_board.move(select_vector(key));
             event.preventDefault();
         }
     });
