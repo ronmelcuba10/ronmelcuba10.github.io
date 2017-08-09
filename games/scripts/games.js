@@ -11,17 +11,46 @@ $(document).ready(function (){
     var option_2048_id = option_prefix + g2048;
     var option_back = option_prefix + back;
     var ext = ".html";
-    var option_text_class = "option-text"
-
-    var menu_options = {
-        "option-battleship"     :["Battleship",     games_path + battleship + "/" + battleship + ext,  option_text_class],
-        "option-tictactoe"      :["Tic Tac Toe",    games_path + tictactoe + "/" + tictactoe + ext,    option_text_class],
-        "option-2048"           :["2048",           games_path + g2048 + "/" + g2048 + ext,            option_text_class],
-        "option-back"           :["Back to my page","https://ronmelcuba10.github.io",   ""]
-    };
+    var option_class = "option-text";
+    var no_class = "";
+    var games = ["Battleship", "Tic Tac Toe", "2048", "Tetris","Back"];
+    var index_URL = "https://ronmelcuba10.github.io";
+    var menu_options = build_menu_options();
 
     addMenuItems();
 
+    
+    // build the menu variable
+    function build_menu_options() {
+        var options = {};
+        games.forEach( function(game_name){
+            console.log(`this is the game option ${game_name}`);
+            var option_value = [game_name, path_to(game_name), class_to(game_name)];    // value is an ARRAY
+            options[key_to(game_name)] = option_value;                                  // key -> value
+            console.log(` key=${key_to(game_name)}  value=${option_value}`);
+        });
+        return options;
+    }
+
+    function path_to(name) {
+        var clean_name = name.replace(/\s+/g,'').toLowerCase();
+        var path = games_path + clean_name + "/" + clean_name + ext;
+        return is_the_back_option() ? index_URL : path;
+    }
+
+    function class_to(name){
+        return is_the_back_option() ? no_class : option_class;
+    }
+
+    function key_to(name) {
+        return "option-" + name.replace(/\s+/g,'').toLowerCase();
+    }
+
+    function is_the_back_option(option) {
+        return option == games[games.length-1];
+    }
+
+    
     function addMenuItems(){
 
         Object.keys(menu_options).forEach(function (key) {
