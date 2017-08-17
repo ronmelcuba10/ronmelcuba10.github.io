@@ -47,18 +47,11 @@ function play() {
 // returns true if there is no collision in the tiles passed as parameters
 function collision(contested_tiles){
     for( var i = 0; i < contested_tiles.length; i++){
-        //console.log(` contested tiles coordinates x${contested_tiles[i].x}  y${contested_tiles[i].y}`); 
-        //var is_empty = false;
-        //var is_whith_in = tiles.tile_is_whith_in_limits(contested_tiles[i].x, contested_tiles[i].y);
-        //if (is_whith_in) var is_empty = tiles.is_Empty_At(contested_tiles[i].x, contested_tiles[i].y);
-        //console.log(` is in ${is_whith_in}  is empty${is_empty}`); 
         if (!tiles.tile_is_whith_in_limits(contested_tiles[i].x, contested_tiles[i].y) 
             || !(tiles.is_Empty_At(contested_tiles[i].x, contested_tiles[i].y))){
-                //console.log("collision");                                        
                 return true;
             }
     }
-    //console.log("no collision");
     return false;
 }
 
@@ -104,7 +97,6 @@ function move(key){
             break;
         default: 
             move_down();
-            //play();
     }
 }
 
@@ -113,10 +105,8 @@ function move(key){
 function move_down(){
     if(!collision_down()){
         piece.move_down(ctx);
-        //console.log("going down");
         return true;
     }
-    //console.log("not going down");
     piece.touch_down();
     return false;
 }
@@ -153,6 +143,31 @@ $(pause_btn_id).click(function(){
     toggle_movement();
 });
 
+$(left_btn_id).click(function(){
+    move_left();
+});
+
+
+$(right_btn_id).click(function(){
+    move_right();
+});
+
+
+$(down_btn_id).click(function(){
+    move_down();
+});
+
+$(rotation_cw_btn_id).click(function(){
+    rotate();
+});
+
+$(rotation_ccw_btn_id).click(function(){
+    rotate();
+    rotate();
+    rotate();
+});
+
+
 // handling key events
 $(document).keydown(function (event) {
     var key = event.which;
@@ -173,8 +188,6 @@ $(document).keydown(function (event) {
 
 
 
-
-    
 /**
  * THE GAME 
  */
