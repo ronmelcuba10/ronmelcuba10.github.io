@@ -1,0 +1,34 @@
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <link href="css/tetris.css" rel="stylesheet">
+        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	</head>
+	<body>
+		<div class="center-page centered">
+            <h1 id="heading">This is my TETRIS</h1>
+            <div id="game-board">
+                <canvas id="game-canvas" width="400" height="700">
+                </canvas>
+            </div>
+            <div id="game-controls">
+                <div id="rccw" class="control-button"><i class="fa fa-undo btn-text" aria-hidden="true"></i></div>
+                <div id="left" class="control-button"><i class="fa fa-arrow-left btn-text" aria-hidden="true"></i></div>
+                <div id="down" class="control-button"><i class="fa fa-arrow-down btn-text" aria-hidden="true"></i></div>
+                <div id="right" class="control-button"><i class="fa fa-arrow-right btn-text" aria-hidden="true"></i></div>
+                <div id="rcw" class="control-button"><i class="fa fa-repeat btn-text" aria-hidden="true"></i></div>
+            </div>
+            <div id="pause-wrapper">
+                <div id="pause">Pause</div>
+            </div>
+        </div>
+        <script src="scripts/constants.js"></script>
+        <script src="scripts/utils.js"></script>
+        <script src="scripts/block.js"></script>
+        <script src="scripts/piece.js"></script>
+        <script src="scripts/tiles.js"></script>
+        <script src="scripts/tetris.js"></script>
+	</body>
+</html>
