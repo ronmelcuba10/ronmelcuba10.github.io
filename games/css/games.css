@@ -51,3 +51,10 @@ a h3 {
     background-size: 84% auto;
     background-position: 107px -73px;
 }
+
+#option-tetris {
+    background-image: url("../images/tetris.png");
+    background-color: #82CAFA ;
+    background-size: 84% auto;
+    background-position: 107px 191px;
+}
