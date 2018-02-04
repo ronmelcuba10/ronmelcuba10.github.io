@@ -411,3 +411,21 @@
   transform: translateX(0);
 }
 
+.tile{
+  border: 3px solid gray;
+  border-radius: 10px;
+  text-align: center;
+  margin: 5px 5px; 
+  height : 100px
+}
+
+.tile-img {
+  float: left;
+  height: 90px;
+  margin: 5px 5px;
+}
+
+.tile-desc{
+  margin: 5px 10px 10px 5px;
+}
+
