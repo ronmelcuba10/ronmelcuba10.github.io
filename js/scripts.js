@@ -52,25 +52,25 @@ $(document).ready(function () {
 	var main_skills = {
 		"csharp-img": ["CSharp", "images/csharp.png"],
 		"python-img": ["Python", "images/python.png"],
-		"java-img": ["Java", "images/java.png"],
+		//"java-img": ["Java", "images/java.png"],
 		"delphi-img": ["Delphi", "images/delphi.png"]
 	};
 
 
 	$("#skills-section").append(function () {
-		var elements = ""
+		var elements = `<div class="col-md-3"></div>`;
 		var value;
 		Object.keys(main_skills).forEach(function (key) {
 			value = main_skills[key];
 			skill_name = value[0];
 			skill_image = value[1];
-			skills = '<div class="col-md-3 skill" id="' + key + '">'
+			skills = '<div class="col-md-2 skill" id="' + key + '">'
 				+ '<img alt="Responsive image" class="img-responsive img-circle center-block shadowboxes" src="' + skill_image + '" /> '
 				+ ' <h3>' + skill_name + '</h3> '
 				+ '</div>';
 			elements += skills;
 		});
-		return elements
+		return elements + `<div class="col-md-3"></div>`;
 	});
 
 	$("#csharp-img").fadeIn(1500);
@@ -80,13 +80,13 @@ $(document).ready(function () {
 
 
 	var hobbies = {
-		"Family": ["images/family.png", "#"],
-		"Sports": ["images/basketball.png", "#"],
-		"Food &amp; Wine": ["images/food_and_wine.png", "#"],
-		"Video games": ["images/video_game.png", "#"],
-		"Learn &amp; Read": ["images/glasses.png", "#"],
-		"Lego blocks": ["images/LEGO.png", "#"],
-		"My Games": ["images/TicTacToe.png", "games/games.html"]
+		"Family": ["images/family.png", "#", ""],
+		"Sports": ["images/basketball.png", "#", ""],
+		"Food &amp; Wine": ["images/food_and_wine.png", "#", ""],
+		"Video games": ["images/video_game.png", "#", ""],
+		"Learn &amp; Read": ["images/glasses.png", "#", ""],
+		"Lego blocks": ["images/LEGO.png", "#", ""],
+		"My Games": ["images/TicTacToe.png", "games/games.html", "Games I've developed in JS"]
 	};
 
 
@@ -97,12 +97,13 @@ $(document).ready(function () {
 			hobby = hobbies[key];
 			hobby_image = hobby[0];
 			hobby_source = hobby[1];
-			hobb = '<div class="col-md-1 col-centered image">'
-				+ '<a href="' + hobby_source + '">'
-				+ '<img alt="Responsive image" class="img-responsive img-circle center-block shadowboxes"'
-				+ 'src="' + hobby_image + '" />'
+			hobby_title = hobby[2];
+			hobb = `<div class="col-md-1 col-centered image">`
+				+ `<a href="${hobby_source}">`
+				+ `<img alt="Responsive image" class="img-responsive img-circle center-block shadowboxes"`
+				+ `src="${hobby_image}" title="${hobby_title}"/>`
 				+ '</a>'
-				+ '<h4>' + key + '</h4>'
+				+ `<h4>${key}</h4>`
 				+ '</div>';
 			elements += hobb;
 		});
