@@ -13,7 +13,7 @@ $(document).ready(function (){
     var ext = ".html";
     var option_class = "option-text";
     var no_class = "";
-    var games = ["Battleship", "Tic Tac Toe", "2048", "Tetris","Back"];
+    var games = ["Battleship", "Tic Tac Toe", "2048", "Tetris", "Back"];
     var index_URL = "https://ronmelcuba10.github.io";
     var menu_options = build_menu_options();
 
@@ -35,11 +35,11 @@ $(document).ready(function (){
     function path_to(name) {
         var clean_name = name.replace(/\s+/g,'').toLowerCase();
         var path = games_path + clean_name + "/" + clean_name + ext;
-        return is_the_back_option() ? index_URL : path;
+        return is_the_back_option(name) ? index_URL : path;
     }
 
     function class_to(name){
-        return is_the_back_option() ? no_class : option_class;
+        return is_the_back_option(name) ? no_class : option_class;
     }
 
     function key_to(name) {
@@ -47,7 +47,7 @@ $(document).ready(function (){
     }
 
     function is_the_back_option(option) {
-        return option == games[games.length-1];
+        return option == "Back";//games[games.length-1]"";
     }
 
     
