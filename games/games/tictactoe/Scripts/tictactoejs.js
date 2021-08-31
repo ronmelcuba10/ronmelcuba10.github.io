@@ -240,6 +240,13 @@
         if ($(cells[upper_center_cell]).hasClass(user_clicked)){
             if ($(cells[center_cell]).hasClass(user_clicked) && $(cells[lower_center_cell]).hasClass(empty_cell)) return lower_center_cell;
             if ($(cells[lower_center_cell]).hasClass(user_clicked) && $(cells[center_cell]).hasClass(empty_cell)) return center_cell;
+            if ($(cells[right_center_cell]).hasClass(user_clicked) && $(cells[right_upper_cell]).hasClass(empty_cell)) return right_upper_cell;
+            if ($(cells[left_center_cell]).hasClass(user_clicked) && $(cells[left_upper_cell]).hasClass(empty_cell)) return left_upper_cell;
+        }
+
+        if ($(cells[lower_center_cell]).hasClass(user_clicked)){
+            if ($(cells[right_center_cell]).hasClass(user_clicked) && $(cells[right_lower_cell]).hasClass(empty_cell)) return right_lower_cell;
+            if ($(cells[left_center_cell]).hasClass(user_clicked) && $(cells[left_lower_cell]).hasClass(empty_cell)) return left_lower_cell;
         }  
 
         if ($(cells[left_center_cell]).hasClass(user_clicked)){
@@ -262,6 +269,7 @@
         if (($(cells[left_upper_cell]).hasClass(empty_cell) && $(cells[upper_center_cell]).hasClass(user_clicked) && $(cells[right_upper_cell]).hasClass(user_clicked)) || 
             ($(cells[left_upper_cell]).hasClass(empty_cell) && $(cells[left_center_cell]).hasClass(user_clicked) && $(cells[left_lower_cell]).hasClass(user_clicked)) ||
             ($(cells[left_upper_cell]).hasClass(empty_cell) && $(cells[center_cell]).hasClass(user_clicked) && $(cells[right_lower_cell]).hasClass(user_clicked))) return left_upper_cell;
+
         if ($(cells[upper_center_cell]).hasClass(empty_cell) && $(cells[center_cell]).hasClass(user_clicked) && $(cells[lower_center_cell]).hasClass(user_clicked)) return upper_center_cell;
 
         if ($(cells[left_center_cell]).hasClass(empty_cell) && $(cells[center_cell]).hasClass(user_clicked) && $(cells[right_center_cell]).hasClass(user_clicked)) return left_center_cell;  
